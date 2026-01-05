@@ -1,0 +1,14 @@
+# Android Recon - Python Dependencies
+# ====================================
+
+# Web Dashboard
+flask>=2.0.0
+
+# System Monitoring
+psutil>=5.8.0
+
+# Network Interfaces
+netifaces>=0.11.0
+
+# JSON Schema Validation (optional)
+jsonschema>=4.0.0

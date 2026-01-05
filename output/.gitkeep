@@ -1,0 +1,11 @@
+# Output Directory
+
+This directory contains scan results in JSON format.
+
+Scan results are automatically saved here when running:
+- `./recon.sh scan network`
+- `./recon.sh scan wifi`
+- `./recon.sh scan bt`
+- `./recon.sh scan all`
+
+Files are named with the pattern: `{scan_type}_{timestamp}.json`
