@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Android Recon - WiFi Scanner Module
-====================================
+Linux Recon - WiFi Scanner Module
+==================================
 Scans for nearby WiFi networks and collects wireless information.
 Outputs results in standardized JSON format.
 

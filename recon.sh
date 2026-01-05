@@ -1,8 +1,8 @@
 #!/bin/bash
 # ============================================================================
-# Android Recon - Main CLI Entry Point
+# Linux Recon - Main CLI Entry Point
 # ============================================================================
-# Clean-room, open-source reconnaissance radar for Android Termux
+# Clean-room, open-source reconnaissance radar for Linux
 # 
 # Usage:
 #   ./recon.sh [command] [options]
@@ -43,12 +43,12 @@ show_banner() {
     echo -e "${CYAN}"
     echo "╔══════════════════════════════════════════════════════════════╗"
     echo "║                                                              ║"
-    echo "║     █████╗ ███╗   ██╗██████╗ ██████╗  ██████╗ ██╗██████╗    ║"
-    echo "║    ██╔══██╗████╗  ██║██╔══██╗██╔══██╗██╔═══██╗██║██╔══██╗   ║"
-    echo "║    ███████║██╔██╗ ██║██║  ██║██████╔╝██║   ██║██║██║  ██║   ║"
-    echo "║    ██╔══██║██║╚██╗██║██║  ██║██╔══██╗██║   ██║██║██║  ██║   ║"
-    echo "║    ██║  ██║██║ ╚████║██████╔╝██║  ██║╚██████╔╝██║██████╔╝   ║"
-    echo "║    ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝╚═════╝    ║"
+    echo "║    ██╗     ██╗███╗   ██╗██╗   ██╗██╗  ██╗                    ║"
+    echo "║    ██║     ██║████╗  ██║██║   ██║╚██╗██╔╝                    ║"
+    echo "║    ██║     ██║██╔██╗ ██║██║   ██║ ╚███╔╝                     ║"
+    echo "║    ██║     ██║██║╚██╗██║██║   ██║ ██╔██╗                     ║"
+    echo "║    ███████╗██║██║ ╚████║╚██████╔╝██╔╝ ██╗                    ║"
+    echo "║    ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝                    ║"
     echo "║                                                              ║"
     echo "║            ██████╗ ███████╗ ██████╗ ██████╗ ███╗   ██╗      ║"
     echo "║            ██╔══██╗██╔════╝██╔════╝██╔═══██╗████╗  ██║      ║"
@@ -261,17 +261,22 @@ show_status() {
         print_warning "Root access: Not available (some features limited)"
     fi
     
-    # Termux check
+    # Environment detection
     if [ -d "/data/data/com.termux" ] || [ -n "$TERMUX_VERSION" ]; then
-        print_success "Environment: Termux"
+        print_status "Environment: Android Termux"
+    elif [ -f /etc/os-release ]; then
+        # shellcheck disable=SC1091
+        . /etc/os-release
+        print_status "Environment: ${NAME:-Linux} ${VERSION_ID:-}"
     else
-        print_status "Environment: Standard Linux"
+        print_status "Environment: Linux"
     fi
     
     # Network tools
     command -v ip &> /dev/null && print_success "ip command: Available" || print_warning "ip command: Not found"
     command -v ping &> /dev/null && print_success "ping command: Available" || print_warning "ping command: Not found"
     command -v iwlist &> /dev/null && print_success "iwlist command: Available" || print_warning "iwlist command: Not found"
+    command -v iw &> /dev/null && print_success "iw command: Available" || print_warning "iw command: Not found"
     command -v hcitool &> /dev/null && print_success "hcitool command: Available" || print_warning "hcitool command: Not found"
     
     # Python modules
@@ -380,7 +385,7 @@ main() {
             show_help
             ;;
         version|--version|-v)
-            echo "Android Recon v${VERSION}"
+            echo "Linux Recon v${VERSION}"
             ;;
         *)
             print_error "Unknown command: $COMMAND"

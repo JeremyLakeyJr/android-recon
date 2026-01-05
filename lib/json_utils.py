@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Android Recon - JSON Output Utilities
-=====================================
+Linux Recon - JSON Output Utilities
+====================================
 Provides consistent JSON formatting and output functions for all scanner modules.
 """
 

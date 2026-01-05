@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Android Recon - Bluetooth Scanner Module
-========================================
+Linux Recon - Bluetooth Scanner Module
+=======================================
 Scans for nearby Bluetooth devices including Classic and Low Energy (BLE).
 Outputs results in standardized JSON format.
 

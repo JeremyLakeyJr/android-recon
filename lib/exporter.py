@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Android Recon - Export Utilities
-================================
+Linux Recon - Export Utilities
+===============================
 Export scan results to various formats (JSON, CSV).
 """
 
@@ -143,7 +143,7 @@ def export_to_csv(scans: List[Dict[str, Any]], output_path: str) -> str:
 
 def main():
     """Main entry point for exporter."""
-    parser = argparse.ArgumentParser(description="Export Android Recon scan results")
+    parser = argparse.ArgumentParser(description="Export Linux Recon scan results")
     parser.add_argument(
         "--format", "-f",
         choices=["json", "csv"],

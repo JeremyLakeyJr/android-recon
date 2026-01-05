@@ -1,15 +1,15 @@
-# Android Recon
+# Linux Recon
 
 <div align="center">
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
-║     █████╗ ███╗   ██╗██████╗ ██████╗  ██████╗ ██╗██████╗    ║
-║    ██╔══██╗████╗  ██║██╔══██╗██╔══██╗██╔═══██╗██║██╔══██╗   ║
-║    ███████║██╔██╗ ██║██║  ██║██████╔╝██║   ██║██║██║  ██║   ║
-║    ██╔══██║██║╚██╗██║██║  ██║██╔══██╗██║   ██║██║██║  ██║   ║
-║    ██║  ██║██║ ╚████║██████╔╝██║  ██║╚██████╔╝██║██████╔╝   ║
-║    ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝╚═════╝    ║
+║    ██╗     ██╗███╗   ██╗██╗   ██╗██╗  ██╗                    ║
+║    ██║     ██║████╗  ██║██║   ██║╚██╗██╔╝                    ║
+║    ██║     ██║██╔██╗ ██║██║   ██║ ╚███╔╝                     ║
+║    ██║     ██║██║╚██╗██║██║   ██║ ██╔██╗                     ║
+║    ███████╗██║██║ ╚████║╚██████╔╝██╔╝ ██╗                    ║
+║    ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝                    ║
 ║                                                              ║
 ║            ██████╗ ███████╗ ██████╗ ██████╗ ███╗   ██╗      ║
 ║            ██╔══██╗██╔════╝██╔════╝██╔═══██╗████╗  ██║      ║
@@ -20,17 +20,25 @@
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-**Clean-Room Open-Source Reconnaissance Radar for Android Termux**
+**Clean-Room Open-Source Reconnaissance Radar for Linux**
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Android%20Termux-green.svg)](https://termux.dev/)
+[![Platform](https://img.shields.io/badge/Platform-Linux-green.svg)](https://www.linux.org/)
 [![Python](https://img.shields.io/badge/Python-3.7+-yellow.svg)](https://python.org/)
 
 </div>
 
 ## Overview
 
-Android Recon is a clean-room, open-source reconnaissance radar tool designed for Android Termux. It provides modular network, WiFi, and Bluetooth scanning capabilities with a radar-style terminal UI and optional web dashboard.
+Linux Recon is a clean-room, open-source reconnaissance radar tool designed for all Linux environments. It provides modular network, WiFi, and Bluetooth scanning capabilities with a radar-style terminal UI and optional web dashboard.
+
+### Supported Platforms
+
+- **Debian/Ubuntu** and derivatives
+- **Fedora/RHEL/CentOS** and derivatives
+- **Arch Linux** and derivatives
+- **Android Termux**
+- **Other Linux distributions** (with manual dependency installation)
 
 ### Key Features
 
@@ -53,7 +61,7 @@ cd android-recon
 # Run the installer
 bash install.sh
 
-# Launch Android Recon
+# Launch Linux Recon
 ./recon.sh
 ```
 
@@ -310,7 +318,7 @@ Edit `config/default.json` to customize behavior:
 
 ### System Requirements
 
-- **OS**: Android (Termux), Linux, macOS
+- **OS**: Linux (Debian/Ubuntu, Fedora, Arch, Termux, etc.)
 - **Python**: 3.7+
 - **Shell**: Bash
 
@@ -328,15 +336,31 @@ Edit `config/default.json` to customize behavior:
 - `psutil` (system info)
 - `netifaces` (network interfaces)
 
-### Termux-Specific
+### Platform-Specific Notes
 
+#### Debian/Ubuntu
+```bash
+sudo apt-get install python3 python3-pip wireless-tools iw bluez nmap
+```
+
+#### Fedora/RHEL
+```bash
+sudo dnf install python3 python3-pip wireless-tools iw bluez nmap
+```
+
+#### Arch Linux
+```bash
+sudo pacman -S python python-pip wireless_tools iw bluez nmap
+```
+
+#### Android Termux
 For full functionality on Android Termux:
 - Install Termux from F-Droid
 - Install Termux-API addon
 - Grant necessary permissions
 
 ```bash
-pkg install termux-api
+pkg install termux-api python
 termux-setup-storage
 ```
 
@@ -427,7 +451,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ## Acknowledgments
 
-- Built for the Android Termux community
+- Built for the Linux community
 - Inspired by classic network reconnaissance tools
 - Uses only open-source, freely available components
 

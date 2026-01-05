@@ -1,9 +1,16 @@
 #!/bin/bash
 # ============================================================================
-# Android Recon - Auto-Install Script for Termux
+# Linux Recon - Auto-Install Script
 # ============================================================================
-# This script automatically sets up all dependencies for the Android Recon
-# reconnaissance radar tool on Termux (Android terminal emulator).
+# This script automatically sets up all dependencies for the Linux Recon
+# reconnaissance radar tool on any Linux distribution.
+#
+# Supported platforms:
+#   - Debian/Ubuntu and derivatives
+#   - Fedora/RHEL/CentOS and derivatives
+#   - Arch Linux and derivatives
+#   - Android Termux
+#   - Other Linux distributions (manual dependency installation)
 #
 # Usage: bash install.sh
 # ============================================================================
@@ -21,8 +28,8 @@ NC='\033[0m' # No Color
 # Banner
 echo -e "${CYAN}"
 echo "╔══════════════════════════════════════════════════════════════╗"
-echo "║            ANDROID RECON - Installation Script               ║"
-echo "║         Clean-Room Open-Source Reconnaissance Radar          ║"
+echo "║              LINUX RECON - Installation Script                ║"
+echo "║         Clean-Room Open-Source Reconnaissance Radar           ║"
 echo "╚══════════════════════════════════════════════════════════════╝"
 echo -e "${NC}"
 
@@ -56,11 +63,23 @@ detect_environment() {
     elif command -v dnf &> /dev/null; then
         ENVIRONMENT="fedora"
         PKG_MANAGER="dnf"
-        print_status "Detected Fedora environment"
+        print_status "Detected Fedora/RHEL environment"
+    elif command -v yum &> /dev/null; then
+        ENVIRONMENT="rhel"
+        PKG_MANAGER="yum"
+        print_status "Detected RHEL/CentOS environment"
     elif command -v pacman &> /dev/null; then
         ENVIRONMENT="arch"
         PKG_MANAGER="pacman"
         print_status "Detected Arch Linux environment"
+    elif command -v zypper &> /dev/null; then
+        ENVIRONMENT="suse"
+        PKG_MANAGER="zypper"
+        print_status "Detected openSUSE environment"
+    elif command -v apk &> /dev/null; then
+        ENVIRONMENT="alpine"
+        PKG_MANAGER="apk"
+        print_status "Detected Alpine Linux environment"
     else
         ENVIRONMENT="unknown"
         PKG_MANAGER=""
@@ -79,10 +98,19 @@ update_packages() {
             sudo apt-get update -y
             ;;
         fedora)
-            sudo dnf update -y
+            sudo dnf check-update || true
+            ;;
+        rhel)
+            sudo yum check-update || true
             ;;
         arch)
-            sudo pacman -Syu --noconfirm
+            sudo pacman -Sy --noconfirm
+            ;;
+        suse)
+            sudo zypper refresh
+            ;;
+        alpine)
+            sudo apk update
             ;;
         *)
             print_warning "Skipping package update for unknown environment"
@@ -95,13 +123,9 @@ update_packages() {
 install_system_deps() {
     print_status "Installing system dependencies..."
     
-    # Core packages needed
-    PACKAGES="python python-pip git curl wget"
-    
-    # Add environment-specific packages
     case $ENVIRONMENT in
         termux)
-            PACKAGES="$PACKAGES termux-api wireless-tools iw root-repo tsu"
+            PACKAGES="python python-pip git curl wget termux-api wireless-tools iw root-repo tsu"
             pkg install -y $PACKAGES 2>/dev/null || {
                 # Try installing packages one by one if bulk install fails
                 for pkg in $PACKAGES; do
@@ -110,7 +134,7 @@ install_system_deps() {
             }
             ;;
         debian)
-            PACKAGES="$PACKAGES net-tools wireless-tools iw bluetooth bluez nmap"
+            PACKAGES="python3 python3-pip git curl wget net-tools wireless-tools iw bluetooth bluez nmap"
             sudo apt-get install -y $PACKAGES 2>/dev/null || {
                 for pkg in $PACKAGES; do
                     sudo apt-get install -y "$pkg" 2>/dev/null || print_warning "Could not install: $pkg"
@@ -118,12 +142,24 @@ install_system_deps() {
             }
             ;;
         fedora)
-            PACKAGES="$PACKAGES net-tools wireless-tools iw bluez nmap"
+            PACKAGES="python3 python3-pip git curl wget net-tools wireless-tools iw bluez nmap"
             sudo dnf install -y $PACKAGES 2>/dev/null || print_warning "Some packages could not be installed"
             ;;
+        rhel)
+            PACKAGES="python3 python3-pip git curl wget net-tools wireless-tools iw bluez nmap"
+            sudo yum install -y $PACKAGES 2>/dev/null || print_warning "Some packages could not be installed"
+            ;;
         arch)
-            PACKAGES="$PACKAGES net-tools wireless_tools iw bluez nmap"
+            PACKAGES="python python-pip git curl wget net-tools wireless_tools iw bluez nmap"
             sudo pacman -S --noconfirm $PACKAGES 2>/dev/null || print_warning "Some packages could not be installed"
+            ;;
+        suse)
+            PACKAGES="python3 python3-pip git curl wget net-tools wireless-tools iw bluez nmap"
+            sudo zypper install -y $PACKAGES 2>/dev/null || print_warning "Some packages could not be installed"
+            ;;
+        alpine)
+            PACKAGES="python3 py3-pip git curl wget net-tools wireless-tools iw bluez nmap"
+            sudo apk add $PACKAGES 2>/dev/null || print_warning "Some packages could not be installed"
             ;;
         *)
             print_warning "Please manually install: python3, pip, git, wireless-tools, iw, bluetooth tools"
