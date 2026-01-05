@@ -2,7 +2,7 @@
 # ====================================
 
 # Web Dashboard
-flask>=2.0.0
+flask>=2.2.5
 
 # System Monitoring
 psutil>=5.8.0
