@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Android Recon - Radar Terminal UI
-=================================
+Linux Recon - Radar Terminal UI
+================================
 Real-time radar-style terminal interface for displaying scan results.
 Uses curses for cross-platform terminal rendering.
 
@@ -122,7 +122,7 @@ class RadarUI:
     
     def draw_header(self, height: int, width: int):
         """Draw the header section."""
-        title = " ANDROID RECON - RADAR "
+        title = " LINUX RECON - RADAR "
         
         # Draw top border
         self.stdscr.attron(curses.color_pair(self.COLOR_HEADER))

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Android Recon - Web Dashboard Server
-====================================
+Linux Recon - Web Dashboard Server
+===================================
 Optional localhost web dashboard for viewing scan results.
 Uses Flask for lightweight web serving.
 
@@ -39,7 +39,7 @@ DASHBOARD_HTML = '''
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Android Recon - Dashboard</title>
+    <title>Linux Recon - Dashboard</title>
     <style>
         :root {
             --bg-primary: #0a0a0a;
@@ -307,7 +307,7 @@ DASHBOARD_HTML = '''
 <body>
     <div class="container">
         <header>
-            <h1>⟨ ANDROID RECON ⟩</h1>
+            <h1>⟨ LINUX RECON ⟩</h1>
             <div class="subtitle">Reconnaissance Radar Dashboard</div>
         </header>
         

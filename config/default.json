@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "app_name": "Android Recon",
+    "app_name": "Linux Recon",
     "output_dir": "./output",
     "log_level": "INFO",
     "scanners": {

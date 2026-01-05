@@ -1,5 +1,5 @@
-# Android Recon - Python Dependencies
-# ====================================
+# Linux Recon - Python Dependencies
+# ==================================
 
 # Web Dashboard
 flask>=2.2.5

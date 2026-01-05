@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Android Recon - Network Scanner Module
-======================================
+Linux Recon - Network Scanner Module
+=====================================
 Scans local network for hosts, open ports, and network information.
 Outputs results in standardized JSON format.
 
