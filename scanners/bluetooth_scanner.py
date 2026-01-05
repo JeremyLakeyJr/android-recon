@@ -14,10 +14,12 @@ Features:
 """
 
 import argparse
+import json
 import os
 import re
 import subprocess
 import sys
+import time
 from typing import Any, Dict, List, Optional
 
 # Add lib to path
@@ -306,7 +308,6 @@ def scan_bluetooth_termux() -> List[Dict[str, Any]]:
         )
         
         if result.returncode == 0:
-            import json
             try:
                 data = json.loads(result.stdout)
                 for dev in data:

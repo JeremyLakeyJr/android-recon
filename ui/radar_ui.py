@@ -532,8 +532,9 @@ class RadarUI:
             self.draw()
             self.handle_input()
             
-            # Control refresh rate
-            time.sleep(self.refresh_rate / 10)
+            # Control refresh rate with minimum threshold to avoid high CPU usage
+            sleep_time = max(0.05, self.refresh_rate / 10)
+            time.sleep(sleep_time)
 
 
 def run_radar_ui(output_dir: str, refresh_rate: float = 1.0):

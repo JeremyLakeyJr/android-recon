@@ -14,10 +14,12 @@ Features:
 """
 
 import argparse
+import json
 import os
 import re
 import subprocess
 import sys
+import time
 from typing import Any, Dict, List, Optional
 
 # Add lib to path
@@ -144,7 +146,6 @@ def scan_wifi_networks_iw(interface: str) -> List[Dict[str, Any]]:
         )
         
         # Wait a moment for scan to complete
-        import time
         time.sleep(2)
         
         # Get scan results
@@ -364,7 +365,6 @@ def scan_wifi_networks_termux() -> List[Dict[str, Any]]:
         )
         
         if result.returncode == 0:
-            import json
             try:
                 data = json.loads(result.stdout)
                 for net in data:
