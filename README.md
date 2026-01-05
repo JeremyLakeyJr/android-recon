@@ -61,7 +61,7 @@ cd android-recon
 # Run the installer
 bash install.sh
 
-# Launch Android Recon
+# Launch Linux Recon
 ./recon.sh
 ```
 
